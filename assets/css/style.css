@@ -1,0 +1,20 @@
+.login-img{
+
+}
+header {
+    height:50px;
+    background:#0066CC;
+    border:1px solid #CCC;
+    width:100%;
+    margin:0px auto;
+    color:#fff;
+}
+footer {
+    background-color: #e1e1e1;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    overflow:hidden;
+}
