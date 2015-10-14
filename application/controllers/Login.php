@@ -19,22 +19,31 @@ class Login extends CI_Controller {
 	}
 	public function validateLogin(){
 
-		$post = $this->input->post();
+		$form_data = $this->input->post();
 
-		if($post){
-		$this->load->model('user_login');
+		if($form_data) {
 
-		$result = $this->user_login->validateUser($post);
-		if($result)
-		redirect('admin/landing');
-	else{
-		$this->session->set_flashdata('error', 'Invalid');
+		$this->load->model('authentication');
+
+		$result = $this->authentication->validateUser($form_data);
+
+			if($result) {
+
+			if($result[0]->role=='admin')
+			redirect('admin/landing');
+			if($result[0]->role=='user')
+			redirect('user/landing');
+			}else {
+			$this->session->set_flashdata('error', 'Invalid');
+			redirect('login');
+	    	}
+		} else {
 		redirect('login');
-	}
-		
 		}
-		
-		else
+	}
+
+	public function logout() {
+		$this->session->sess_destroy();
 		redirect('login');
 	}
 }
