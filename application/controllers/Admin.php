@@ -19,10 +19,11 @@ class Admin extends CI_Controller {
 		$this->load->model('users');
 
 		$user_id   = $this->session->userdata('user_id');
-		
+		$script    = array();
 		switch ($page_topic) {
 			case 'manage_employees':
 				$user_data = $this->users->get_user_data();
+				$script    = array('scripts'=>array('assign_employee'));
 				break;
 			case 'view_employees':
 				$user_data = $this->users->get_user_data(array('manager_id'=>$user_id));
@@ -31,6 +32,7 @@ class Admin extends CI_Controller {
 				$this->load->model('leaves');
 				$this->load->helper('leave_date');
 				$user_role   = $this->session->userdata('user_role');
+				$script    = array('scripts'=>array('manage_leave'));
 				$user_data = $this->leaves->get_user_leaves($user_id,$user_role);
 				break;
 			default:
@@ -43,7 +45,7 @@ class Admin extends CI_Controller {
 		
 		
 		$page_data = array('navigation'=>$page_topic,'user_data'=>$user_data,'controller'=>'admin');
-		$script    = array('scripts'=>array('assign_employee'));
+		
 		$this->load->view('common/header',$script);
 		$this->load->view('landing_page',$page_data);
 		$this->load->view('common/footer');
@@ -61,13 +63,14 @@ class Admin extends CI_Controller {
 		switch ($action) {
 			case 'assign':
 				$manager_id   = $this->session->userdata('user_id');
-				$this->users->assign_user_to_manager($manager_id,$user_id);
 				break;
 			case 'unassign':
 				$manager_id   = NULL;
-				$this->users->assign_user_to_manager($manager_id,$user_id);
 				break;
 		}
+
+		$this->users->assign_user_to_manager($manager_id,$user_id);
+		return true;
 	}
 }
 ?>

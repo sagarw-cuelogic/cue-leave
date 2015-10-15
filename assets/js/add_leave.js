@@ -1,15 +1,14 @@
 $(document).ready(function(){
 $('.datepicker').datetimepicker({
-	minDate: new Date(),
-	useCurrent:true,
-	format:'MM/DD/YYYY',
-	defaultDate:''
+	format: 'd-m-Y',
+    formatDate: 'm.d.Y',
+    timepicker: false,
+    minDate:'-1970/01/02'
+
 });
-
-$('.date').val("");
-$('.end_date').val("");
-$('.start_date').val("");
-
+$('.calendar_icon').click(function(){
+	$(this).parent().find('.datepicker').datetimepicker('show');
+})
 $('body').on('click','.leaves',function(){
 	
 	var leave_plan = $(this).val();

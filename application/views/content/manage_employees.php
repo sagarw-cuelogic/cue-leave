@@ -1,7 +1,4 @@
-<div class="pull-left col-md-2 col-sm-2">
-<img src="<?=base_url();?>assets/images/download.jpeg" class="img-responsive">
-</div>
-<div class="col-md-10 col-sm-10 pull-left profile">
+<div class="col-md-11 col-sm-11 pull-left profile">
 	<div class="panel panel-primary">
 		<div class="panel-heading">Assign Employee</div>
 		<div class="panel-body">
