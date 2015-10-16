@@ -43,11 +43,11 @@
 				<select class="form-control designation-menu" name="designation" required>
 				<option value="">Select</option>
 				<?php foreach ($designations as $key => $value) {
-					if($user_data->designation==$key)
+					if($user_data->designation==$value->id)
 						$select ='selected';
 					else
 						$select = '';?>
-				<option value="<?=$key?>" <?=$select?>><?=$value->name?></option>
+				<option value="<?=$value->id?>" <?=$select?>><?=$value->name?></option>
 				<?}?>
 			</select>
 			<div class="help-block with-errors text-left"></div>
@@ -56,7 +56,7 @@
 		<div class="form-group">
 			<label class="col-sm-3 control-label text-left">Phone Number</label>
 			<div class="col-sm-9">
-				<input type="text" class="form-control" id="phone" name="phone" value="<?=$user_data->phone?>" required/>
+				<input type="text" class="form-control" id="phone" name="phone" value="<?=$user_data->phone?>" data-minlength="10" ="10" maxlength="10" data-error="Phone number must be 10 digit" required/>
 				<div class="help-block with-errors text-left"></div>
 			</div>
 		</div>

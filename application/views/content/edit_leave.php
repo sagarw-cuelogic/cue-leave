@@ -68,7 +68,7 @@
             <div class="form-group more_then_day_leave">
 				<label for="leave_pan_half_day" class="col-sm-3 control-label">Start Date</label>
 				<div class="form-group col-sm-9 ">
-                <div class='input-group col-md-5 ' id='form_date'>
+                <div class='input-group col-md-5'>
                     <input type='text' class="form-control start_date datepicker" id="start_date" name="leave_start_date" data-error="Please select start date" value="<?=convertDbDate($user_data->leave_start_date)?>" required/>
                     <span class="input-group-addon calendar_icon">
                         <span class="glyphicon glyphicon-calendar"></span>
@@ -81,7 +81,7 @@
             <div class="form-group more_then_day_leave">
             	<label for="leave_pan_half_day" class="col-sm-3 control-label">End Date</label>
             	<div class="form-group col-sm-9 ">
-            	 <div class='input-group col-md-5 ' id='end_date'>
+            	 <div class='input-group col-md-5'>
                     <input type='text' class="form-control end_date datepicker" id="end_date" name="leave_end_date" data-error="Please select end date" value="<?=convertDbDate($user_data->leave_end_date)?>" required/>
                    
                     <span class="input-group-addon calendar_icon">

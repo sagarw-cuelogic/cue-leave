@@ -1,12 +1,11 @@
 <?php
 $leave_status_array =array('approved'=>'Approve','disapproved'=>'Disapprove');
-
 ?>
 <div class="col-md-11 col-sm-11 pull-left profile">
 	<div class="panel panel-primary">
 		<div class="panel-heading">Leave Details..</div>
 		<div class="panel-body">
-			<?php if(!empty($user_data)){?>
+			<?php if(!empty($leave_data)){?>
 			<div class="form-group">
 			<table class="table table-bordered table-striped leave_table">
 				
@@ -20,7 +19,7 @@ $leave_status_array =array('approved'=>'Approve','disapproved'=>'Disapprove');
 					</thead>
 				
 					<tbody>
-					<?php foreach ($user_data as $key => $value) {
+					<?php foreach ($leave_data as $key => $value) {
 
 						$noOfLeaves = businessWorkingDays($value->leave_start_date,$value->leave_end_date);
 						$start_date = convertDbDate($value->leave_start_date);
@@ -28,7 +27,7 @@ $leave_status_array =array('approved'=>'Approve','disapproved'=>'Disapprove');
 						?>
 						<tr>
 							<td class="text-center"><?=$value->first.' '.$value->last?></td>
-							<td class="text-center view_leave_calendar" data-leave-id="<?=$value->leave_id?>" data-user-id="<?=$value->user_id?>"><?=$start_date?> To <?=$end_date?><div class="clearfix"></div><span>click here for more</span></td>
+							<td class="text-center view_leave_calendar" data-leave-id="<?=$value->leave_id?>" data-user-id="<?=$value->user_id?>"><?=$start_date?> To <?=$end_date?><div class="clearfix"></div><span class="show_more">click here for more</span></td>
 							<td class="text-center"><?=ucfirst($value->leave_type);?></td>
 							<td class="text-center"><?=$noOfLeaves?></td>
 							<td class="text-center status"><?=($value->leave_status)?ucfirst($value->leave_status):'Pending'?></td>

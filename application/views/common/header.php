@@ -28,14 +28,14 @@
 	<?php if($this->session->userdata('user_id')){?>
 	<div class="btn-group pull-right padding-12">
 	  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	    Welcome <?=$this->session->userdata('first')?> <span class="caret"></span>
+	    Welcome <?=ucfirst($this->session->userdata('first'));?> <span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu">
 	    <li><a href="#">Account Settings</a></li>
 	    <li role="separator" class="divider"></li>
 	    <li><a href="#">Change Password</a></li>
 	    <li role="separator" class="divider"></li>
-	    <li><a href="<?=base_url()?>login/logout">Logout</a></li>
+	    <li><a href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=<?=base_url()?>login/logout">Logout</a></li>
 	  </ul>
 	</div>
 	<?}?>

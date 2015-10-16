@@ -70,15 +70,15 @@ class Leaves extends CI_Model {
 
     function get_user_leaves($user_id,$role) {
 
-    	$query = "SELECT ul.*, up.first,up.last 
-    	          FROM user_leaves ul, user_profile up
-    	          WHERE ul.user_id =up.user_id ";
+    	$query = "SELECT ul.*, ga.first,ga.last,ga.profile_picture 
+    	          FROM user_leaves ul, google_account ga
+    	          WHERE ul.user_id =ga.id ";
         switch ($role) {
             case 'user':
                 $query.="AND ul.user_id = {$this->db->escape($user_id)}";
                 break;
             case 'admin':
-                $query.="AND up.manager_id = {$this->db->escape($user_id)}";
+                $query.="AND ul.manager_id = {$this->db->escape($user_id)}";
                 break;
             default:
                 break;
@@ -96,6 +96,17 @@ class Leaves extends CI_Model {
         $query = " SELECT *
                   FROM user_leaves 
                   WHERE leave_id = {$this->db->escape($leave_id)} and user_id ={$this->db->escape($user_id)}";
+
+        $result = $this->db->query($query); 
+
+        if($result->num_rows()>0)
+            return $result->result();
+        else
+            return array();         
+    }
+    function get_holiday_list() {
+
+        $query = " SELECT * FROM holiday_list ";
 
         $result = $this->db->query($query); 
 

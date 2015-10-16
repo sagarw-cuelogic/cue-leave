@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = 'http://cue-leave/';
+$config['base_url'] = 'http://cue-leave.com';
 
 /*
 |--------------------------------------------------------------------------
@@ -505,3 +505,18 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+/*
+|-------------------------------------------------------
+|Google Auth login library configuration for login
+|-------------------------------------------------------
+| It is use to login via google accounts to the website
+|
+|
+*/
+$config['google_application_name'] 	= 'cue-leave'; 
+$config['google_client_id'] 		= '406105334359-kmhn496977fuveiheg6c1fcu06eoq66c.apps.googleusercontent.com'; 
+$config['google_client_secret'] 	= 'XTjRx_5ROuSvLkvaEy5OzsdZ'; 
+$config['google_redirect_uri'] 		= 'http://cue-leave.com'; 
+$config['google_api_key'] 			='AIzaSyBSemJlXjlPo9vivX6YKdqSJ_afG-Rtips';
+$config['google_allow_domain'] 		='cuelogic.co.in';

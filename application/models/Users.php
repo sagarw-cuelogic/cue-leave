@@ -11,7 +11,7 @@ class Users extends CI_Model {
 
 		
 
-		 $sql = "SELECT * FROM user_profile ";
+		 $sql = "SELECT * FROM google_account ";
 
 		 if($where_filters){
 		 	$sql.= " WHERE ";
@@ -92,8 +92,8 @@ class Users extends CI_Model {
     						  'address'=>$address,
     						  'designation'=>$designation);
 
-    	$this->db->where('user_id',$user_id);
-    	$result = $this->db->update('user_profile',$update_array);
+    	$this->db->where('id',$user_id);
+    	$result = $this->db->update('google_account',$update_array);
 
     	if($result)
     		return true;

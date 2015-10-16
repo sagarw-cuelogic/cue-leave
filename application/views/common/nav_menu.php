@@ -1,4 +1,4 @@
-<div class="cms-left-section col-md-12 col-sm-12 padding-6">
+<div class="cms-left-section col-md-12 col-sm-12 margin-left-20">
 <ul class="nav nav-pills nav-stacked">
   <?php if($this->session->userdata('user_role')=='user'){?>
   <li role="presentation" class="<?=($navigation=='profile')?'active':''?>"><a href="<?=base_url();?><?=$controller?>/landing/profile">Profile <span class="glyphicon glyphicon-user pull-right" aria-hidden="true"></span></a></li>
@@ -9,7 +9,7 @@
   <?php }}?>
   <?php if($this->session->userdata('user_role')=='admin'){?>
   <li role="presentation" class="<?=($navigation=='view_leaves')?'active':''?>"><a href="<?=base_url();?><?=$controller?>/landing/view_leaves">View Leaves <span class="glyphicon glyphicon-th-list pull-right" aria-hidden="true"></span></a></li>
-   <li role="presentation" class="<?=($navigation=='manage_employees')?'active':''?>"><a href="<?=base_url();?><?=$controller?>/landing/manage_employees">Manage Employees <span class="glyphicon glyphicon-user" aria-hidden="true"></span></a></li>
+   <li role="presentation" class="<?=($navigation=='manage_employees')?'active':''?>"><a href="<?=base_url();?><?=$controller?>/landing/manage_employees">Manage Employees <span class="glyphicon glyphicon-user pull-right" aria-hidden="true"></span></a></li>
    <li role="presentation" class="<?=($navigation=='view_employees')?'active':''?>"><a href="<?=base_url();?><?=$controller?>/landing/view_employees">View Employees <span class="glyphicon glyphicon-th-list pull-right" aria-hidden="true"></span></a></li>
   <?php }?>
 </ul>

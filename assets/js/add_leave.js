@@ -1,14 +1,36 @@
 $(document).ready(function(){
-$('.datepicker').datetimepicker({
-	format: 'd-m-Y',
-    formatDate: 'm.d.Y',
-    timepicker: false,
-    minDate:'-1970/01/02'
+	var s_date ='';
+// $('.datepicker').datetimepicker({
+// 	format: 'd-m-Y',
+//     formatDate: 'm.d.Y',
+//     timepicker: false,
+//     minDate:'-1970/01/02'
 
+// });
+// $('.calendar_icon').click(function(){
+// 	$(this).parent().find('.datepicker').datetimepicker('show');
+// });
+ $('#start_date').datetimepicker({
+  format: 'd-m-Y',
+
+  minDate:'-1970/01/02',
+  onShow:function( ct ){
+   this.setOptions({
+    maxDate:$('#end_date').val()?$('#end_date').val():false
+   })
+  },
+  onSelectDate:function( ct,$i ){
+    s_date = ct.dateFormat('Y/m/d');
+ }
 });
-$('.calendar_icon').click(function(){
-	$(this).parent().find('.datepicker').datetimepicker('show');
-})
+ $('#end_date').datetimepicker({
+  format: 'd-m-Y',
+  onShow:function( ct ){
+   this.setOptions({
+    minDate:s_date
+   })
+  }
+ });
 $('body').on('click','.leaves',function(){
 	
 	var leave_plan = $(this).val();
