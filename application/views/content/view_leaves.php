@@ -35,7 +35,7 @@ $leave_status_array =array('approved'=>'Approve','disapproved'=>'Disapprove');
 							<td class="text-center"><?=$noOfLeaves?></td>
 							<td class="text-center status"><?=($value->leave_status)?ucfirst($value->leave_status):'Pending'?></td>
 							<td class="text-center">
-							<?php if($controller=='admin'){?>
+							<?php if($controller=='manager'){?>
 							<select class="form-control select-menu" data-leave-id="<?=$value->leave_id?>">
 							<option value="">Select</option>
 							<?foreach ($leave_status_array as $key => $option) {

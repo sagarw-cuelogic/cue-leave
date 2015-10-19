@@ -7,14 +7,14 @@
 			<table class="table table-bordered table-striped leave_table">
 					<thead>
 						<th class="text-center">Employee Name</th>
-						<th class="text-center">Email</th>
+						<th class="text-center">Reporting Manager Name</th>
 					</thead>
 					<tbody>
 					<?php foreach ($user_data as $key => $value) {
 						?>
 						<tr>
-							<td class="text-center"><?=$value->first.' '.$value->last?></td>
-							<td class="text-center"><?=$value->email?></td>
+							<td class="text-center"><?=$value->employee_name?></td>
+							<td class="text-center"><?=$value->manager_name?></td>
 						</tr>
 					<?}?>
 					</tbody>

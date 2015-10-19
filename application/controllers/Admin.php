@@ -37,12 +37,12 @@ class Admin extends CI_Controller {
 			case 'manage_employees':
 
 				$user_data = $this->users->get_user_data();
-
+					$page_data['emp_data']   = $user_data;
 				$script    = array('scripts'=>array('assign_employee'));
 			break;
 			//view the manager employees
 			case 'view_employees':
-				$user_data = $this->users->getManagerEmployees($user_id);
+				$user_data = $this->users->getAllManagerEmployees();
 			break;
 			//view the user leaves
 			case 'view_leaves':
@@ -52,6 +52,7 @@ class Admin extends CI_Controller {
 				$user_role   = $this->session->userdata('user_role');
 				$script    = array('scripts'=>array('manage_leave'));
 				$user_data = $this->leaves->get_user_leaves($user_id,$user_role);
+				$page_data['leave_data'] = $user_data;
 			break;
 			//view user profile
 			case 'profile':

@@ -6,13 +6,10 @@ class Manager extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 	}
-	
-	public function sign_up() {
-		$this->load->view('common/header');
-		$this->load->view('user');
-		$this->load->view('common/footer');
-	}
-
+	/**
+	 * Function to get the manager list
+	 * @return type
+	 */
 	public function getManagers() {
 	
 		$this->load->model('users');
@@ -22,10 +19,14 @@ class Manager extends CI_Controller {
 		$page_data = array('managers'=>$managers);
 		$this->load->view('content/manager_list',$page_data);
 	}
-
+	/**
+	 * Function to display the manager landing page
+	 * @param type $page_topic 
+	 * @return type
+	 */
 	public function landing($page_topic='profile'){
 
-		
+		//access the page if manager
 		if($this->session->userdata('user_id')>0 && $this->session->userdata('user_role')!='manager'){
 			redirect('login');
 		}
@@ -37,7 +38,7 @@ class Manager extends CI_Controller {
 		$script     = array();
 		
 		switch ($page_topic) {
-			
+			//view user profile
 			case 'profile':
 					
 					$user_data = $this->users->getUserById($user_id);
@@ -46,14 +47,20 @@ class Manager extends CI_Controller {
 					$page_data['designations'] = $designations;
 					$user_data = $user_data[0];
 			break;
+			//manage the employees under the manager
 			case 'manage_employees':
 
-				$user_data = $this->users->getManagerEmployees($user_id);
+				$emp_data = $this->users->getManagerEmployees($user_id);
+				$user_data  = $this->users->getUserById($user_id);
+				$user_data  = $user_data[0];
+				$page_data['emp_data'] = $emp_data;
 				$script    = array('scripts'=>array('assign_employee'));
 			break;
+			//view employees under manager
 			case 'view_employees':
 				$user_data = $this->users->getManagerEmployees($user_id);
 			break;
+			//view leaves
 			case 'view_leaves':
 					
 					$this->load->model('leaves');
@@ -63,9 +70,10 @@ class Manager extends CI_Controller {
 					$script     = array('scripts'=>array('manage_leave'));
 					$user_data  = $this->users->getUserById($user_id);
 					$user_data  = $user_data[0];
-					$leave_data = $this->leaves->get_user_leaves($user_id);
+					$leave_data = $this->leaves->get_user_leaves($user_id,$user_role='user');
 					$page_data['leave_data'] = $leave_data;
 			break;
+			//get leaves by the leave id
 			case 'employee_leaves':
 				$this->load->model('leaves');
 				$this->load->helper('leave_date');
@@ -76,7 +84,7 @@ class Manager extends CI_Controller {
 				$user_data  = $user_data[0];
 				$leave_data = $this->leaves->get_user_leaves($user_id,$user_role);
 				$page_data['leave_data'] = $leave_data;
-				break;
+			break;
 			default:
 
 				$user_data  = $this->users->getUserById($user_id);

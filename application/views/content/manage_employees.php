@@ -13,7 +13,7 @@
 					<th class="text-center">Action</th>
 				</thead>
 				<tbody>
-					<?php foreach ($user_data as $key => $value) {
+					<?php foreach ($emp_data as $key => $value) {
 					if($this->session->userdata('user_email')!=$value->email){
 					?>
 					<tr>
@@ -22,7 +22,11 @@
 					<td class="text-center"><?=$value->designation_name?></td>
 					<td class="text-center status"><?=($value->manager_id)?'Assigned':'Pending'?></td>
 					<td class="text-center"><button class="btn btn-info <?=($value->manager_id)?'unassigned':'assign'?>" 
-						data-emp-id="<?=$value->id?>"  <?=($value->manager_id)?'':'data-toggle="modal" data-target="#manager"'?> ><?=($value->manager_id)?'De-assign':'Assign Manager'?></button>&nbsp;<a class="btn btn-info " href="<?=base_url();?>admin/landing/profile/<?=$value->id?>" data-emp-id="<?=$value->id?>">Edit Profile</a></td>
+						data-emp-id="<?=$value->id?>"  <?=($value->manager_id)?'':'data-toggle="modal" data-target="#manager"'?> ><?=($value->manager_id)?'De-assign':'Assign Manager'?></button>&nbsp;
+						<?php if($this->session->userdata('user_role')=='admin'){?>
+						<a class="btn btn-info " href="<?=base_url();?>admin/landing/profile/<?=$value->id?>" data-emp-id="<?=$value->id?>">Edit Profile</a>
+						<?}?>
+					</td>
 					</tr>
 					<?}}?>
 				</tbody>
@@ -39,6 +43,7 @@
 <!-- Modal content-->
 <div class="modal-content">
   <div class="modal-header">
+  	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <h4 class="modal-title">Managers List</h4>
   </div>
   <div class="modal-body manager_list">

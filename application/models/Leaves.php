@@ -90,13 +90,13 @@ class Leaves extends CI_Model {
                 $query.="AND ul.user_id = {$this->db->escape($user_id)}";
                 break;
             case 'manager':
-                $query.="AND ul.manager_id = {$this->db->escape($user_id)}";
+                $query.="AND ga.manager_id = {$this->db->escape($user_id)}";
                 break;
             default:
                 $query.="AND ul.user_id = {$this->db->escape($user_id)}";
             break;
         }
-    	
+    	//echo $query;die();
     	$result = $this->db->query($query); 
 
     	if($result->num_rows()>0)
@@ -152,7 +152,7 @@ class Leaves extends CI_Model {
 
         $update_array = array('leave_comments'=>$leave_comments,
                               'leave_status'=>$leave_status,
-                              'manager_id'=>$manager_id);
+                              'user_manager_id'=>$manager_id);
 
         $this->db->where('leave_id', $leave_id);
         $this->db->update('user_leaves', $update_array);

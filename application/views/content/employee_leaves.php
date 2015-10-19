@@ -58,7 +58,7 @@ $leave_status_array =array('approved'=>'Approve','disapproved'=>'Disapprove');
 		</div>
 	</div>
 </div>
-<?php if($controller=='admin'){?>
+<?php if($controller=='manager'){?>
 <div id="leave_action_modal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 	<!-- Modal content-->

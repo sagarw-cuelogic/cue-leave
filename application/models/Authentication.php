@@ -85,7 +85,7 @@ class Authentication extends CI_Model {
 		 	return $user_data;
 		 } else {
 		 		
-		 		$sql = "SELECT * FROM google_account LEFT JOIN designations ON (google_account.designation = designations.id) 
+		 		$sql = "SELECT * FROM google_account LEFT JOIN designations ON (google_account.designation = designations.designation_id) 
 		            WHERE email = {$this->db->escape($email)} ";
 
 		    $result = $this->db->query($sql);
@@ -93,7 +93,7 @@ class Authentication extends CI_Model {
 		    if($result->num_rows()>0) {
 
 				 	$user_data = $result->result();
-				 	
+				 	//add the user role as manager
 				 	if($user_data[0]->designation_name=='Project Manager') {
 				 		$this->session->set_userdata('user_role', 'manager');
 				 		$this->session->set_userdata('first', $user_data[0]->first);

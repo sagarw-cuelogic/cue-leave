@@ -12,7 +12,28 @@ class Users extends CI_Model {
     	$user_data = $this->get_user_data($where);
     	return $user_data;
     }
+    function getAllManagerEmployees() {
 
+    	 $sql = "SELECT CONCAT(e.first,' ',e.last) as employee_name ,
+    	 								CONCAT(m.first,' ',m.last) as manager_name,
+    	 								e.email as employee_email,
+    	 								m.email as manager_email,
+    	 								d1.designation_name as employee_designation,
+    	 								d.designation_name as manager_designation 
+    	 				 FROM google_account e 
+							 LEFT JOIN designations d1  ON ( e.designation=d1.designation_id ) 
+							 LEFT JOIN google_account m ON ( e.manager_id=m.id ) 	
+               LEFT JOIN designations d   ON ( m.designation=d.designation_id) WHERE e.manager_id IS NOT NULL ";
+
+    	 $result = $this->db->query($sql);
+		 
+			 if($result->num_rows()>0){
+			 	$user_data = $result->result();
+			 	return $user_data;
+			 }else {
+			 	return false;
+			 }
+    }
     function getUserById($user_id) {
 
     	$where     = array("google_account.id"=>$user_id);
