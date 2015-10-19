@@ -5,7 +5,11 @@ class Leaves extends CI_Model {
 	function __construct() {
         parent::__construct();
     }
-
+    /**
+     * Function to add the user leaves in db.
+     * @param type $input_data 
+     * @return type
+     */
     function add_leaves($input_data) {
 
     	$user_id 			= $input_data['user_id'];
@@ -16,8 +20,8 @@ class Leaves extends CI_Model {
     	$leave_type 		= $input_data['leave_type'];
     	$leave_plan 		= $input_data['leave_plan'];
 
-		$start_date 		= date('Y-m-d',strtotime($leave_start_date));
-		$end_date 			= date('Y-m-d',strtotime($leave_end_date));
+  		$start_date 		= date('Y-m-d',strtotime($leave_start_date));
+  		$end_date 			= date('Y-m-d',strtotime($leave_end_date));
     	
     	$insert_array = array('user_id'=>$user_id,
     						  'leave_subject'=>$leave_subject,
@@ -35,7 +39,11 @@ class Leaves extends CI_Model {
     	else
     		return false;
     }
-
+    /**
+     * Function to update the user leaves
+     * @param type $input_data 
+     * @return type
+     */
     function update_leaves($input_data) {
 
         $user_id            = $input_data['user_id'];
@@ -66,7 +74,12 @@ class Leaves extends CI_Model {
         else
             return false;
     }
-
+    /**
+     * Function to display the user leaves as per the role
+     * @param type $user_id 
+     * @param type $role 
+     * @return type
+     */
     function get_user_leaves($user_id,$role=null) {
 
     	$query = "SELECT ul.*, ga.first,ga.last,ga.profile_picture 
@@ -80,7 +93,7 @@ class Leaves extends CI_Model {
                 $query.="AND ul.manager_id = {$this->db->escape($user_id)}";
                 break;
             default:
-             $query.="AND ul.user_id = {$this->db->escape($user_id)}";
+                $query.="AND ul.user_id = {$this->db->escape($user_id)}";
             break;
         }
     	
@@ -91,6 +104,12 @@ class Leaves extends CI_Model {
     	else
     		return array();
     }
+    /**
+     * Function get the leave details by leave id and user id
+     * @param type $leave_id 
+     * @param type $user_id 
+     * @return type
+     */
     function get_leave_details($leave_id,$user_id) {
 
         $query = " SELECT *
@@ -104,6 +123,10 @@ class Leaves extends CI_Model {
         else
             return array();         
     }
+    /**
+     * Function to display the list of holidays from db.
+     * @return type
+     */
     function get_holiday_list() {
 
         $query = " SELECT * FROM holiday_list ";
@@ -115,8 +138,12 @@ class Leaves extends CI_Model {
         else
             return array();         
     }
-    
-    function manage_leaves($input_data) {
+    /**
+     * Function to add the leave comments by the manager
+     * @param type $input_data 
+     * @return type
+     */
+    function add_leave_comments($input_data) {
 
         $leave_comments = $input_data['leave_comments'];
         $leave_status   = $input_data['leave_status'];

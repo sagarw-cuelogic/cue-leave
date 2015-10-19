@@ -6,13 +6,21 @@ class Admin extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 	}
-
+	/**
+	 * Function to load the landing page
+	 * @return type
+	 */
 	public function index() {
 		$this->landing();
 	}
-
+	/**
+	 * Function to load landing page as per the navigation
+	 * @param type $page_topic 
+	 * @return type
+	 */
 	public function landing($page_topic='view_leaves') {
 
+		//access only for the admin users
 		if($this->session->userdata('user_id')>0 && $this->session->userdata('user_role')!='admin'){
 			redirect('login');
 		}
@@ -25,17 +33,18 @@ class Admin extends CI_Controller {
 
 		switch ($page_topic) {
 
+			//manage the employees
 			case 'manage_employees':
 
 				$user_data = $this->users->get_user_data();
 
 				$script    = array('scripts'=>array('assign_employee'));
 			break;
-
+			//view the manager employees
 			case 'view_employees':
 				$user_data = $this->users->getManagerEmployees($user_id);
 			break;
-
+			//view the user leaves
 			case 'view_leaves':
 
 				$this->load->model('leaves');
@@ -44,7 +53,7 @@ class Admin extends CI_Controller {
 				$script    = array('scripts'=>array('manage_leave'));
 				$user_data = $this->leaves->get_user_leaves($user_id,$user_role);
 			break;
-
+			//view user profile
 			case 'profile':
 
 					$employee_id = (int)$this->uri->segment(4);
@@ -59,6 +68,7 @@ class Admin extends CI_Controller {
 					$page_data['designations'] = $designations;
 					$user_data = $user_data[0];
 			break;
+			//edit user profile
 			case 'edit_profile':
 					
 					$form_data = $this->input->post();
@@ -105,7 +115,11 @@ class Admin extends CI_Controller {
 		$this->load->view('common/footer');
 		
 	}
-
+	/**
+	 * Function to assign employee manager
+	 * @param type $action 
+	 * @return type
+	 */
 	public function assign_to_manager($action) {
 
 		$this->load->model('users');

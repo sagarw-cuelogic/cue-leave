@@ -6,13 +6,20 @@ class User extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 	}
-	
+	/**
+	 * Function for sign up new user
+	 * @return type
+	 */
 	public function sign_up() {
 		$this->load->view('common/header');
 		$this->load->view('user');
 		$this->load->view('common/footer');
 	}
-
+	/**
+	 * Function to add new user records in db 
+	 * Currently not using these function as login is done for already existing employee
+	 * @return type
+	 */
 	public function add_user() {
 		$form_data = $this->input->post();
 
@@ -26,7 +33,12 @@ class User extends CI_Controller {
 		$this->load->view('user');
 		$this->load->view('common/footer');
 	}
-
+	/**
+	 * Function for the use landing page
+	 * Load the page as per the navigation 
+	 * @param type $page_topic 
+	 * @return type
+	 */
 	public function landing($page_topic='profile'){
 
 		
@@ -70,7 +82,7 @@ class User extends CI_Controller {
 						redirect('user/landing/profile');
 					}
 			break;
-			
+			//add the user leaves
 			case 'add_leaves':
 
 					$this->load->model('leaves');
@@ -80,12 +92,11 @@ class User extends CI_Controller {
 					$user_data = $user_data[0];
 					$page_data['holiday_list'] = $holiday_list;
 			break;
-
+			//view the list of  leaves
 			case 'view_leaves':
 					
 					$this->load->model('leaves');
 					$this->load->helper('leave_date');
-
 					
 					$script     = array('scripts'=>array('manage_leave'));
 					$user_data  = $this->users->getUserById($user_id);
@@ -93,7 +104,7 @@ class User extends CI_Controller {
 					$leave_data = $this->leaves->get_user_leaves($user_id,$user_role);
 					$page_data['leave_data'] = $leave_data;
 			break;
-			
+			//edit the user leaves
 			case 'edit_leave':
 
 					$this->load->model('leaves');
@@ -131,6 +142,11 @@ class User extends CI_Controller {
 		$this->load->view('common/footer');
 		
 	}
+	/**
+	 * Function to upload the picture or change the profile picture
+	 * Currently not using these function as we get the profile picture from google data auth
+	 * @return type
+	 */
 	public function upload_picture() {
 		
 		$config['upload_path'] = './uploads/';
@@ -153,7 +169,6 @@ class User extends CI_Controller {
 		  $form_data['profile_picture'] = $file_data['file_name'];
 			$result = $this->users->update_profile_picture($form_data);
 			redirect('user/landing/profile');
-		  
 		}
 		else {
 		   echo  $this->upload->display_errors();
