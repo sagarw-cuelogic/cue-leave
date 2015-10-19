@@ -288,5 +288,5 @@ switch (ENVIRONMENT)
  * --------------------------------------------------------------------
  *
  * And away we go...
- */
+ * the file can be loaded from the assets folder */
 require_once BASEPATH.'core/CodeIgniter.php';
