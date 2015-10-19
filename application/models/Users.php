@@ -2,32 +2,47 @@
 
 class Users extends CI_Model {
 	
-	function __construct()
-    {
+	function __construct() {
         parent::__construct();
+    }
+
+    function getManagerEmployees($manager_id) {
+
+    	$where 	   = array("google_account.manager_id"=>$manager_id);
+    	$user_data = $this->get_user_data($where);
+    	return $user_data;
+    }
+
+    function getUserById($user_id) {
+
+    	$where     = array("google_account.id"=>$user_id);
+    	$user_data = $this->get_user_data($where);
+    	return $user_data;
+    }
+
+    function getManagers($user_id) {
+
+    	$where     = array("designations.designation_name"=>'Project Manager','google_account.id !'=>$user_id);
+    	$user_data = $this->get_user_data($where);
+    	return $user_data;
     }
 
 	function get_user_data($where_filters=null){
 
-		
-
-		 $sql = "SELECT * FROM google_account ";
+		 $sql = "SELECT * FROM google_account LEFT JOIN designations ON (google_account.designation = designations.designation_id) ";
 
 		 if($where_filters){
 		 	$sql.= " WHERE ";
 		 	$sql.= $this->_where_string($where_filters);
 		 }
-		
-		        
 		 $result = $this->db->query($sql);
 		 
 		 if($result->num_rows()>0){
 		 	$user_data = $result->result();
 		 	return $user_data;
-		 }
-		 	
-		 else
+		 }else {
 		 	return false;
+		 }
 	}
 	function get_designations() {
 
@@ -37,9 +52,9 @@ class Users extends CI_Model {
 		 if($result->num_rows()>0){
 		 	$user_data = $result->result();
 		 	return $user_data;
-		 }
-		 else
+		 }else {
 		 	return false;
+		 }
 	}
 	function add_new_user($input_data) {
 
@@ -102,27 +117,26 @@ class Users extends CI_Model {
 		
 	}
 	function update_profile_picture($input_data) {
-	
 		
 		$user_id   	     = $input_data['user_id'];
 		$profile_picture = $input_data['profile_picture'];
 
-    	$update_array = array('profile_picture'=>$profile_picture);
+  	$update_array = array('profile_picture'=>$profile_picture);
 
-    	$this->db->where('user_id',$user_id);
-    	$result = $this->db->update('user_profile',$update_array);
+  	$this->db->where('user_id',$user_id);
+  	$result = $this->db->update('user_profile',$update_array);
 
-    	if($result)
-    		return true;
-    	else
-    		return false;
+  	if($result)
+  		return true;
+  	else
+  		return false;
 		
 	}
 	function assign_user_to_manager($manager_id,$user_id) {
 
-		$query = "UPDATE user_profile  
-		        SET manager_id = {$this->db->escape($manager_id)} 
-		        WHERE user_id = {$this->db->escape($user_id)} ";
+		$query = "UPDATE google_account  
+		          SET manager_id = {$this->db->escape($manager_id)} 
+		          WHERE id = {$this->db->escape($user_id)} ";
 
 		$result = $this->db->query($query);
 
@@ -130,20 +144,19 @@ class Users extends CI_Model {
     		return true;
     	else
     		return false;
-
-
 	}
+
 	private function _where_string($where){
 
-        foreach($where as $key => $value){
-           
-                $wheres[] = "{$key} = {$this->db->escape($value)}";
-            
-        }
+	  foreach($where as $key => $value){
+	     
+	          $wheres[] = "{$key}= {$this->db->escape($value)}";
+	      
+	  }
 
-        $where_string = implode(' AND ', $wheres);
+	  $where_string = implode(' AND ', $wheres);
 
-        return $where_string;
-    }
+	  return $where_string;
+	}
 }
 ?>

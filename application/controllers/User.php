@@ -43,17 +43,38 @@ class User extends CI_Controller {
 			
 			case 'profile':
 					
-					$user_data = $this->users->get_user_data(array('id'=>$user_id));
+					$user_data = $this->users->getUserById($user_id);
 					$designations = $this->users->get_designations();
 					$script    = array('scripts'=>array('profile'));
 					$page_data['designations'] = $designations;
 					$user_data = $user_data[0];
 			break;
+
+			case 'edit_profile':
+					
+					$form_data = $this->input->post();
+
+					if($form_data) {
+
+						$this->load->model('users');
+						$user_id   = $this->session->userdata('user_id');
+						$user_role  = $this->session->userdata('user_role');
+						$form_data['user_id'] = $user_id;
+						$result = $this->users->update_profile($form_data);
+						
+						if($result){
+							$this->session->set_flashdata('success', 'You have successfully updated your profile');
+						}else{
+							$this->session->flashdata('error','Sorry We are unable to process the request');
+						}
+						redirect('user/landing/profile');
+					}
+			break;
 			
 			case 'add_leaves':
 
 					$this->load->model('leaves');
-					$user_data = $this->users->get_user_data(array('id'=>$user_id));
+					$user_data = $this->users->getUserById($user_id);
 					$holiday_list = $this->leaves->get_holiday_list();
 					$script    = array('scripts'=>array('add_leave'));
 					$user_data = $user_data[0];
@@ -67,7 +88,7 @@ class User extends CI_Controller {
 
 					
 					$script     = array('scripts'=>array('manage_leave'));
-					$user_data  = $this->users->get_user_data(array('id'=>$user_id));
+					$user_data  = $this->users->getUserById($user_id);
 					$user_data  = $user_data[0];
 					$leave_data = $this->leaves->get_user_leaves($user_id,$user_role);
 					$page_data['leave_data'] = $leave_data;
@@ -94,7 +115,7 @@ class User extends CI_Controller {
 			
 			default:
 
-				$user_data  = $this->users->get_user_data(array('user_id'=>$user_id));
+				$user_data  = $this->users->getUserById($user_id);
 				$script     = array('scripts'=>array('profile'));
 				$page_topic = 'profile';
 				$user_data  = $user_data[0];
@@ -109,24 +130,6 @@ class User extends CI_Controller {
 		$this->load->view('landing_page',$page_data);
 		$this->load->view('common/footer');
 		
-	}
-	public function update_profile() {
-
-		$form_data = $this->input->post();
-
-		if($form_data) {
-			$this->load->model('users');
-			$user_id   = $this->session->userdata('user_id');
-			$form_data['user_id'] = $user_id;
-			$result = $this->users->update_profile($form_data);
-			
-			if($result){
-				$this->session->set_flashdata('success', 'You have successfully updated your profile');
-			}else{
-				$this->session->flashdata('error','Sorry We are unable to process the request');
-			}
-			redirect('user/landing/profile');
-		}
 	}
 	public function upload_picture() {
 		

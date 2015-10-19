@@ -2,8 +2,7 @@
 
 class Leaves extends CI_Model {
 	
-	function __construct()
-    {
+	function __construct() {
         parent::__construct();
     }
 
@@ -68,7 +67,7 @@ class Leaves extends CI_Model {
             return false;
     }
 
-    function get_user_leaves($user_id,$role) {
+    function get_user_leaves($user_id,$role=null) {
 
     	$query = "SELECT ul.*, ga.first,ga.last,ga.profile_picture 
     	          FROM user_leaves ul, google_account ga
@@ -77,11 +76,12 @@ class Leaves extends CI_Model {
             case 'user':
                 $query.="AND ul.user_id = {$this->db->escape($user_id)}";
                 break;
-            case 'admin':
+            case 'manager':
                 $query.="AND ul.manager_id = {$this->db->escape($user_id)}";
                 break;
             default:
-                break;
+             $query.="AND ul.user_id = {$this->db->escape($user_id)}";
+            break;
         }
     	
     	$result = $this->db->query($query); 

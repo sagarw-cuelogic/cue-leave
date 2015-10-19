@@ -27,15 +27,12 @@ $leave_status_array =array('approved'=>'Approve','disapproved'=>'Disapprove');
 						?>
 						<tr>
 							<td class="text-center"><?=$value->first.' '.$value->last?></td>
-							<td class="text-center view_leave_calendar" data-leave-id="<?=$value->leave_id?>" data-user-id="<?=$value->user_id?>"><?=$start_date?> To <?=$end_date?><div class="clearfix"></div>
-								<?php if($noOfLeaves){?>
-								<span class="show_more">click here for more</span>
-								<?}?></td>
+							<td class="text-center view_leave_calendar" data-leave-id="<?=$value->leave_id?>" data-user-id="<?=$value->user_id?>"><?=$start_date?> To <?=$end_date?><div class="clearfix"></div><span class="show_more">click here for more</span></td>
 							<td class="text-center"><?=ucfirst($value->leave_type);?></td>
 							<td class="text-center"><?=$noOfLeaves?></td>
 							<td class="text-center status"><?=($value->leave_status)?ucfirst($value->leave_status):'Pending'?></td>
 							<td class="text-center">
-							<?php if($controller=='admin'){?>
+							<?php if($controller=='manager'){?>
 							<select class="form-control select-menu" data-leave-id="<?=$value->leave_id?>">
 							<option value="">Select</option>
 							<?foreach ($leave_status_array as $key => $option) {

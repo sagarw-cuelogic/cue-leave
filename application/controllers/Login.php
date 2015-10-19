@@ -63,10 +63,12 @@ class Login extends CI_Controller {
 			$this->load->model('authentication');
 			$this->authentication->addGoogleCredentials($userData);
 
-			if($this->session->userdata('user_role')=='admin')
-				redirect('admin/landing');
-			else
-				redirect('user/landing');
+			$user_email = $this->session->userdata('user_email');
+
+			$this->authentication->checkUserRole($user_email);
+			
+			$forward_to = $this->session->userdata('user_role');
+			redirect($forward_to.'/landing');
 		}
 	}
 

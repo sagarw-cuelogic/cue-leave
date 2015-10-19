@@ -20,7 +20,7 @@ function businessWorkingDays($start_date,$end_date,$show_days=false){
 	
 	$workingDays = 0;
 	$date_array =array();
-	 
+	$days = array();
 	$startTimestamp = strtotime($start_date);
 	$endTimestamp = strtotime($end_date);
 	 

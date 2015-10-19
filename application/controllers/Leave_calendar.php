@@ -12,6 +12,8 @@ function generateLeaveCalender(){
 	$this->load->model('leaves');
 	$this->load->library('calendar');
 	$this->load->helper('leave_date');
+	$highlight_date = array();
+	$days = array();
 	$form_data = $this->input->post();
 	$leave_id  = $form_data['leave_id'];
 	$user_id   = $form_data['user_id'];
@@ -26,7 +28,7 @@ function generateLeaveCalender(){
 	$end_date_year  = date('Y',strtotime($dates[0]->leave_end_date));
     
     $days = businessWorkingDays($start_date,$end_date,true);
-   	
+   
    	foreach ($days as $key => $value) {
    		$month = date('m',strtotime($value));
    		$d = ltrim(date('d',strtotime($value)), '0');

@@ -16,7 +16,7 @@ $(document).ready(function(){
   minDate:'-1970/01/02',
   onShow:function( ct ){
    this.setOptions({
-    maxDate:$('#end_date').val()?$('#end_date').val():false
+    //maxDate:$('#end_date').val()?$('#end_date').val():false
    })
   },
   onSelectDate:function( ct,$i ){
