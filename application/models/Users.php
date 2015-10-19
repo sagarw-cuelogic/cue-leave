@@ -26,7 +26,11 @@ class Users extends CI_Model {
     	$user_data = $this->get_user_data($where);
     	return $user_data;
     }
-
+  /**
+   * Function to get the user basic details with designation info.
+   * @param type $where_filters 
+   * @return type
+   */
 	function get_user_data($where_filters=null){
 
 		 $sql = "SELECT * FROM google_account LEFT JOIN designations ON (google_account.designation = designations.designation_id) ";
@@ -44,6 +48,10 @@ class Users extends CI_Model {
 		 	return false;
 		 }
 	}
+	/**
+	 * Function to get all the designations loaded in database
+	 * @return type
+	 */
 	function get_designations() {
 
 		$sql = "SELECT * FROM designations ";
@@ -56,6 +64,12 @@ class Users extends CI_Model {
 		 	return false;
 		 }
 	}
+	/**
+	 * Function to add new user in db.
+	 * currently not using these function as we add user directly once we login by google account
+	 * @param type $input_data 
+	 * @return type
+	 */
 	function add_new_user($input_data) {
 
 		$user_name = $input_data['username'];
@@ -74,22 +88,27 @@ class Users extends CI_Model {
 							  'role'=>$role);
 
 		$query  = $this->db->insert_string('users',$user_array);
-    	$result = $this->db->query($query);
-    	$id     = $this->db->insert_id();
-    	//create profile array to insert into profile table
-    	$profile_array = array('user_id'=>$id,
-    						   'first'=>$first,
-    						   'last'=>$last,'email'=>$email);
+  	$result = $this->db->query($query);
+  	$id     = $this->db->insert_id();
+  	//create profile array to insert into profile table
+  	$profile_array = array(
+  						   'first'=>$first,
+  						   'last'=>$last,'email'=>$email);
 
-    	$query  = $this->db->insert_string('user_profile',$profile_array);
-    	$result = $this->db->query($query);
+  	$query  = $this->db->insert_string('google_account',$profile_array);
+  	$result = $this->db->query($query);
 
-    	if($result)
-    		return true;
-    	else
-    		return false;
+  	if($result)
+  		return true;
+  	else
+  		return false;
 		
 	}
+	/**
+	 * Function to update the profile of the user
+	 * @param type $input_data 
+	 * @return type
+	 */
 	function update_profile($input_data) {
 	
 		$email     	 = $input_data['email'];
@@ -100,22 +119,27 @@ class Users extends CI_Model {
 		$user_id   	 = $input_data['user_id'];
 		$designation = $input_data['designation'];
 
-    	$update_array = array('first'=>$first,
-    						  'last'=>$last,
-    						  'email'=>$email,
-    						  'phone'=>$phone,
-    						  'address'=>$address,
-    						  'designation'=>$designation);
+  	$update_array = array('first'=>$first,
+  						  'last'=>$last,
+  						  'email'=>$email,
+  						  'phone'=>$phone,
+  						  'address'=>$address,
+  						  'designation'=>$designation);
 
-    	$this->db->where('id',$user_id);
-    	$result = $this->db->update('google_account',$update_array);
+  	$this->db->where('id',$user_id);
+  	$result = $this->db->update('google_account',$update_array);
 
-    	if($result)
-    		return true;
-    	else
-    		return false;
+  	if($result)
+  		return true;
+  	else
+  		return false;
 		
 	}
+	/**
+	 * Function to add or update the profile picture
+	 * @param type $input_data 
+	 * @return type
+	 */
 	function update_profile_picture($input_data) {
 		
 		$user_id   	     = $input_data['user_id'];
@@ -123,8 +147,8 @@ class Users extends CI_Model {
 
   	$update_array = array('profile_picture'=>$profile_picture);
 
-  	$this->db->where('user_id',$user_id);
-  	$result = $this->db->update('user_profile',$update_array);
+  	$this->db->where('id',$user_id);
+  	$result = $this->db->update('google_account',$update_array);
 
   	if($result)
   		return true;
