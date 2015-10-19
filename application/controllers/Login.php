@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+//include the google autoload file
 include_once APPPATH . "libraries/Google/autoload.php";
 
 class Login extends CI_Controller {
@@ -8,7 +8,10 @@ class Login extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 	}
-	
+	/**
+	 * Default function to load all the google api settings from config file
+	 * @return type
+	 */
 	public function index() {
 
 		$client_id 			= $this->config->item('google_client_id');
@@ -61,6 +64,7 @@ class Login extends CI_Controller {
 		} else {
 			
 			$this->load->model('authentication');
+			//add the google data in database if not exists
 			$this->authentication->addGoogleCredentials($userData);
 
 			$user_email = $this->session->userdata('user_email');
@@ -68,10 +72,15 @@ class Login extends CI_Controller {
 			$this->authentication->checkUserRole($user_email);
 			
 			$forward_to = $this->session->userdata('user_role');
+
+			//redirect to page as per the role
 			redirect($forward_to.'/landing');
 		}
 	}
-
+	/**
+	 * function to logout from website and google account both
+	 * @return type
+	 */
 	public function logout() {
 
 		$this->session->sess_destroy();

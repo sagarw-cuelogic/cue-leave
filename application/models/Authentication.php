@@ -5,39 +5,11 @@ class Authentication extends CI_Model {
 	function __construct() {
         parent::__construct();
     }
-
-	function validateUser($input_data){
-
-		$username = $input_data['username'];
-		$password = $input_data['password'];
-
-		
-		$encrypted_password = encodeString($password);
-		$decode_password    = decodeString($encrypted_password);
-
-		$sql = "SELECT * FROM users 
-		        WHERE username ={$this->db->escape($username)} ";
-
-		 $result = $this->db->query($sql);
-		 
-		 if($result->num_rows()>0) {
-		 	
-		 	$user_data = $result->result();
-
-		 	$decode_db_password = decodeString($user_data[0]->password);
-
-		 	if($decode_db_password==$decode_password){
-		 		$this->session->set_userdata('user_id', $user_data[0]->id);
-		 		$this->session->set_userdata('user_role', $user_data[0]->role);
-		 		return $user_data;
-		 	} else {
-		 		return false;
-		 	}
-		 	
-		 } else{
-		 		 	return false;
-		 	}
-	}
+    /**
+     * function to add the google credentials in database
+     * @param type $google_user_data 
+     * @return type
+     */
 	function addGoogleCredentials($google_user_data){
 		
 		$first 		= $google_user_data->givenName;
@@ -74,7 +46,11 @@ class Authentication extends CI_Model {
 	    	$this->session->set_userdata('first', $first);
 		}
 	}
-
+	/**
+	 * Function to check whether email address exists in db
+	 * @param type $email 
+	 * @return type
+	 */
 	function checkIfUserExists($email) {
 
 		$sql = "SELECT * FROM google_account 
@@ -90,7 +66,11 @@ class Authentication extends CI_Model {
 		 	return false;
 		 }	
 	}
-
+	/**
+	 * Function to check the user roles
+	 * @param type $email 
+	 * @return type
+	 */
 	function checkUserRole($email) {
 
 		$sql = "SELECT * FROM admin 
