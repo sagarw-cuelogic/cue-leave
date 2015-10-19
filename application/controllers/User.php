@@ -82,7 +82,7 @@ class User extends CI_Controller {
 						redirect('user/landing/profile');
 					}
 			break;
-			
+			//add the user leaves
 			case 'add_leaves':
 
 					$this->load->model('leaves');
@@ -92,12 +92,11 @@ class User extends CI_Controller {
 					$user_data = $user_data[0];
 					$page_data['holiday_list'] = $holiday_list;
 			break;
-
+			//view the list of  leaves
 			case 'view_leaves':
 					
 					$this->load->model('leaves');
 					$this->load->helper('leave_date');
-
 					
 					$script     = array('scripts'=>array('manage_leave'));
 					$user_data  = $this->users->getUserById($user_id);
@@ -105,7 +104,7 @@ class User extends CI_Controller {
 					$leave_data = $this->leaves->get_user_leaves($user_id,$user_role);
 					$page_data['leave_data'] = $leave_data;
 			break;
-			
+			//edit the user leaves
 			case 'edit_leave':
 
 					$this->load->model('leaves');

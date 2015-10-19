@@ -73,7 +73,6 @@
                     <span class="input-group-addon calendar_icon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
-                    
                 </div>
                 <div class="help-block with-errors date-errors text-left"></div>
             	</div>
@@ -83,11 +82,9 @@
             	<div class="form-group col-sm-9 ">
             	 <div class='input-group col-md-5'>
                     <input type='text' class="form-control end_date datepicker" id="end_date" name="leave_end_date" data-error="Please select end date" required/>
-                   
-                    <span class="input-group-addon calendar_icon">
+     								<span class="input-group-addon calendar_icon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
-                     
                 </div> 
                 <div class="help-block with-errors date-errors text-left"></div>
             	</div>
@@ -112,7 +109,6 @@
         <ul class="list-group">
 		  <?php foreach ($holiday_list as $key => $value) {?>
 		  		<li class="list-group-item" style="width:250px;">
-
 		  			<span class=""><?=date('jS M Y',strtotime($value->date))?></span>
 		  			<span class="pull-right"><?=$value->event?></span>
 		  		</li>
