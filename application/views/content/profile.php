@@ -76,7 +76,7 @@
 			<button class="btn btn-primary cancel" type="reset">Cancel</button>
 		</div>
 </div>
-</form>
+	</form>
 </div>
 </div>
 </div>

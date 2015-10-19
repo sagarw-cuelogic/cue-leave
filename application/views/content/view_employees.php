@@ -5,12 +5,10 @@
 			<?php if(!empty($user_data)){?>
 			<div class="form-group">
 			<table class="table table-bordered table-striped leave_table">
-				
 					<thead>
 						<th class="text-center">Employee Name</th>
 						<th class="text-center">Email</th>
 					</thead>
-				
 					<tbody>
 					<?php foreach ($user_data as $key => $value) {
 						?>
@@ -20,7 +18,6 @@
 						</tr>
 					<?}?>
 					</tbody>
-				
 			</table>
 		</div>
 			<?} else{?>
