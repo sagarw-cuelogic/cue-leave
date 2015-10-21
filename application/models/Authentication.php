@@ -27,7 +27,9 @@ class Authentication extends CI_Model {
 		 	$this->session->set_userdata('user_id', $user_data[0]->id);
 		 	$this->session->set_userdata('user_email', $user_data[0]->email);
 		 	$this->session->set_userdata('first', $user_data[0]->first);
-			} else {
+		 	$this->session->set_userdata('user_role', 'admin');
+
+		} else {
 
 				$insert_array = array('first'=>$first,
 		    						  'last'=>$last,

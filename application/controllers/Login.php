@@ -13,11 +13,11 @@ class Login extends CI_Controller {
 	 * @return type
 	 */
 	public function index() {
-
-		$client_id 			= $this->config->item('google_client_id');
+		
+		$client_id 		= $this->config->item('google_client_id');
 		$client_secret 	= $this->config->item('google_client_secret');
 		$redirect_uri 	= $this->config->item('google_redirect_uri');
-		$api_key 				= $this->config->item('google_api_key');
+		$api_key 		= $this->config->item('google_api_key');
 		$hosted_domain 	= $this->config->item('google_allow_domain');
 
 		// Create Client Request to access Google API
