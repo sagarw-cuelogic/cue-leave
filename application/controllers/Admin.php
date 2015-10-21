@@ -37,7 +37,7 @@ class Admin extends CI_Controller {
 			case 'manage_employees':
 
 				$user_data = $this->users->get_user_data();
-					$page_data['emp_data']   = $user_data;
+				$page_data['emp_data']   = $user_data;
 				$script    = array('scripts'=>array('assign_employee'));
 			break;
 			//view the manager employees

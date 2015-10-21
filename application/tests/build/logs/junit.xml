@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="." tests="22" assertions="151" failures="3" errors="0" time="0.040027">
+    <testsuite name="AdminTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/AdminTest.php" tests="6" assertions="64" failures="0" errors="0" time="0.014046">
+      <testcase name="testRole" class="AdminTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/AdminTest.php" line="13" assertions="1" time="0.001168"/>
+      <testcase name="testManage_employees" class="AdminTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/AdminTest.php" line="22" assertions="16" time="0.004296"/>
+      <testcase name="testView_employees" class="AdminTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/AdminTest.php" line="44" assertions="9" time="0.002157"/>
+      <testcase name="testView_leaves" class="AdminTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/AdminTest.php" line="68" assertions="6" time="0.002976"/>
+      <testcase name="testProfile" class="AdminTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/AdminTest.php" line="95" assertions="16" time="0.001836"/>
+      <testcase name="testEdit_profile" class="AdminTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/AdminTest.php" line="117" assertions="16" time="0.001613"/>
+    </testsuite>
+    <testsuite name="LeaveTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/LeaveTest.php" tests="3" assertions="3" failures="3" errors="0" time="0.003587">
+      <testcase name="testAdd_leave" class="LeaveTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/LeaveTest.php" line="15" assertions="1" time="0.001353">
+        <failure type="PHPUnit_Framework_ExpectationFailedException">LeaveTest::testAdd_leave
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'user id is expected to add leaves'
++''
+
+</failure>
+      </testcase>
+      <testcase name="testUpdate_leave" class="LeaveTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/LeaveTest.php" line="37" assertions="1" time="0.001126">
+        <failure type="PHPUnit_Framework_ExpectationFailedException">LeaveTest::testUpdate_leave
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'user id is expected to update leaves'
++''
+
+</failure>
+      </testcase>
+      <testcase name="testajaxLeaveAction" class="LeaveTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/LeaveTest.php" line="58" assertions="1" time="0.001108">
+        <failure type="PHPUnit_Framework_ExpectationFailedException">LeaveTest::testajaxLeaveAction
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'Ajax request is expected'
++''
+
+</failure>
+      </testcase>
+    </testsuite>
+    <testsuite name="LoginTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/LoginTest.php" tests="2" assertions="1" failures="0" errors="0" time="0.003530">
+      <testcase name="testGoogle_config" class="LoginTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/LoginTest.php" line="16" assertions="1" time="0.001190"/>
+      <testcase name="testAdd_GoogleCredentials" class="LoginTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/LoginTest.php" line="36" assertions="0" time="0.002340">
+        <system-out>Test passed. Redirecting to  page.....</system-out>
+      </testcase>
+    </testsuite>
+    <testsuite name="Manager" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/ManagerTest.php" tests="6" assertions="40" failures="0" errors="0" time="0.010337">
+      <testcase name="testGetManagers" class="Manager" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/ManagerTest.php" line="13" assertions="3" time="0.001760"/>
+      <testcase name="testProfile" class="Manager" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/ManagerTest.php" line="32" assertions="16" time="0.001888"/>
+      <testcase name="testManage_employees" class="Manager" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/ManagerTest.php" line="54" assertions="7" time="0.001554"/>
+      <testcase name="testView_employees" class="Manager" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/ManagerTest.php" line="78" assertions="7" time="0.001436"/>
+      <testcase name="testView_leaves" class="Manager" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/ManagerTest.php" line="102" assertions="1" time="0.001907"/>
+      <testcase name="testEmployee_leaves" class="Manager" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/ManagerTest.php" line="129" assertions="6" time="0.001792"/>
+    </testsuite>
+    <testsuite name="UserTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/UserTest.php" tests="5" assertions="43" failures="0" errors="0" time="0.008527">
+      <testcase name="testRole" class="UserTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/UserTest.php" line="13" assertions="1" time="0.000959"/>
+      <testcase name="testAdd_leaves" class="UserTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/UserTest.php" line="22" assertions="4" time="0.001679"/>
+      <testcase name="testView_leaves" class="UserTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/UserTest.php" line="50" assertions="6" time="0.001823"/>
+      <testcase name="testProfile" class="UserTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/UserTest.php" line="83" assertions="16" time="0.001646"/>
+      <testcase name="testEdit_profile" class="UserTest" file="/Users/cuelogic/Websites/cue-leave/application/tests/controllers/UserTest.php" line="105" assertions="16" time="0.002420"/>
+    </testsuite>
+  </testsuite>
+</testsuites>
